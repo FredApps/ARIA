@@ -1,0 +1,69 @@
+{
+  "benchmark_name": "ARIA 10-Task Change Impact Benchmark",
+  "version": "1.0",
+  "status": "VERIFIED",
+  "tasks_count": 10,
+  "tasks_evaluated": 10,
+  "repositories_evaluated": [
+    "fastapi/fastapi",
+    "psf/requests",
+    "VarshithReddy2006/ARIA"
+  ],
+  "metrics": {
+    "baseline": {
+      "file_precision": 0.028,
+      "file_recall": 0.917,
+      "file_f1": 0.053,
+      "caller_resolution_f1": 0.013,
+      "caller_f1": 0.013,
+      "affected_tests_f1": 0.062,
+      "test_f1": 0.062,
+      "false_positive_file_alerts": 4875,
+      "false_positive_files": 4875,
+      "p50_latency_ms": 235.7
+    },
+    "aria_raw": {
+      "file_precision": 0.106,
+      "file_recall": 0.717,
+      "file_f1": 0.18,
+      "caller_resolution_f1": 0.204,
+      "caller_f1": 0.204,
+      "affected_tests_f1_high_tier": 0.285,
+      "test_f1_high": 0.285,
+      "affected_tests_f1_high_med": 0.287,
+      "test_f1_high_med": 0.287,
+      "false_positive_file_alerts": 322,
+      "false_positive_files": 322,
+      "p50_latency_ms": 166.9
+    },
+    "aria_valid_ground_truth": {
+      "file_precision": 0.106,
+      "file_recall": 0.717,
+      "file_f1": 0.18,
+      "caller_resolution_f1": 0.204,
+      "caller_f1": 0.204,
+      "affected_tests_f1_high_tier": 0.364,
+      "test_f1_high": 0.364,
+      "affected_tests_f1_high_med": 0.362,
+      "test_f1_high_med": 0.362,
+      "false_positive_file_alerts": 322,
+      "false_positive_files": 322,
+      "p50_latency_ms": 166.9
+    }
+  },
+  "deltas_vs_baseline": {
+    "file_precision_delta": "+7.8%",
+    "file_f1_delta": "+12.8%",
+    "caller_f1_delta": "+19.0%",
+    "affected_tests_f1_delta_raw": "+22.3%",
+    "affected_tests_f1_delta_valid": "+30.2%",
+    "false_alarms_eliminated": 4553,
+    "noise_reduction_percentage": 93.39
+  },
+  "verified_deltas": {
+    "f1_score_improvement": "+12.8%",
+    "caller_f1_improvement": "+19.0%",
+    "false_positive_reduction_percentage": "93.39%",
+    "false_alarms_eliminated": 4553
+  }
+}

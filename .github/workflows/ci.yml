@@ -40,6 +40,12 @@ jobs:
       - name: Lint with Ruff
         run: ruff check .
 
+      - name: Ruff check
+        run: ruff check evaluation tests
+
+      - name: Ruff format check
+        run: ruff format --check evaluation tests
+
       - name: Check formatting with Ruff (changed files)
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then

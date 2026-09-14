@@ -1,0 +1,211 @@
+[
+  {
+    "task_id": "task-01-fastapi-oauth2",
+    "repository": "fastapi/fastapi",
+    "commit": "49033471594ea5d99a80abdf1043231b7791ee49",
+    "ground_truth": {
+      "files": [
+        {"path": "fastapi/security/oauth2.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "fastapi/security/__init__.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "docs_src/security/tutorial004_an_py310.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "docs_src/security/tutorial005_an_py310.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["OAuth2PasswordBearer", "OAuth2PasswordRequestForm"],
+      "callers": ["login_for_access_token", "read_users_me"],
+      "dependencies": ["fastapi/security/base.py", "fastapi/openapi/models.py"],
+      "tests": [
+        {"path": "tests/test_security_oauth2_password_bearer_optional.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "tests/test_security_oauth2_optional_description.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "tests/test_security_oauth2_authorization_code_bearer.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ]
+    },
+    "validation_status": "VERIFIED",
+    "notes": "All production and test files exist on disk at pinned commit."
+  },
+  {
+    "task_id": "task-02-fastapi-serialize-response",
+    "repository": "fastapi/fastapi",
+    "commit": "49033471594ea5d99a80abdf1043231b7791ee49",
+    "ground_truth": {
+      "files": [
+        {"path": "fastapi/routing.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "fastapi/applications.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "fastapi/__init__.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["serialize_response", "APIRoute", "run_endpoint_function"],
+      "callers": ["APIRoute.get_route_handler", "run_endpoint_function"],
+      "dependencies": ["fastapi/dependencies/models.py", "fastapi/encoders.py"],
+      "tests": [
+        {"path": "tests/test_response_model.py", "status": "STALE", "exists_at_evaluated_commit": false, "notes": "Does not exist on disk. Actual test lives at tests/test_tutorial/test_response_model/test_tutorial001.py"},
+        {"path": "tests/test_serialize_response.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ]
+    },
+    "validation_status": "PARTIAL",
+    "notes": "tests/test_response_model.py is missing on disk in pinned commit."
+  },
+  {
+    "task_id": "task-03-fastapi-status-codes",
+    "repository": "fastapi/fastapi",
+    "commit": "49033471594ea5d99a80abdf1043231b7791ee49",
+    "ground_truth": {
+      "files": [
+        {"path": "fastapi/status.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "fastapi/__init__.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["HTTP_404_NOT_FOUND"],
+      "callers": [],
+      "dependencies": ["starlette/status.py"],
+      "tests": [
+        {"path": "tests/test_status_codes.py", "status": "STALE", "exists_at_evaluated_commit": false, "notes": "Does not exist on disk. Actual test is tests/test_response_change_status_code.py"}
+      ]
+    },
+    "validation_status": "PARTIAL",
+    "notes": "tests/test_status_codes.py is missing on disk in pinned commit."
+  },
+  {
+    "task_id": "task-04-requests-session-send",
+    "repository": "psf/requests",
+    "commit": "5460f467b02e49471c0fd6cfc9ca0adab6351f98",
+    "ground_truth": {
+      "files": [
+        {"path": "src/requests/sessions.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "src/requests/api.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "src/requests/adapters.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["Session.send", "Session.request"],
+      "callers": ["Session.request", "request", "get", "post"],
+      "dependencies": ["src/requests/models.py", "src/requests/hooks.py", "src/requests/utils.py"],
+      "tests": [
+        {"path": "tests/test_requests.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "tests/test_sessions.py", "status": "STALE", "exists_at_evaluated_commit": false, "notes": "Does not exist on disk. All session tests in Requests are consolidated in tests/test_requests.py"}
+      ]
+    },
+    "validation_status": "PARTIAL",
+    "notes": "tests/test_sessions.py is missing on disk in pinned commit."
+  },
+  {
+    "task_id": "task-05-requests-adapters-ssl",
+    "repository": "psf/requests",
+    "commit": "5460f467b02e49471c0fd6cfc9ca0adab6351f98",
+    "ground_truth": {
+      "files": [
+        {"path": "src/requests/adapters.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "src/requests/sessions.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["HTTPAdapter.cert_verify", "HTTPAdapter.init_poolmanager"],
+      "callers": ["HTTPAdapter.send", "HTTPAdapter.get_connection"],
+      "dependencies": ["src/requests/certs.py", "src/requests/compat.py"],
+      "tests": [
+        {"path": "tests/test_adapters.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "tests/test_requests.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ]
+    },
+    "validation_status": "VERIFIED",
+    "notes": "All production and test files exist on disk at pinned commit."
+  },
+  {
+    "task_id": "task-06-requests-models-response",
+    "repository": "psf/requests",
+    "commit": "5460f467b02e49471c0fd6cfc9ca0adab6351f98",
+    "ground_truth": {
+      "files": [
+        {"path": "src/requests/models.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "src/requests/sessions.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "src/requests/adapters.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["Response.content", "Response.text", "Response.json"],
+      "callers": ["Response.text", "Response.json"],
+      "dependencies": ["src/requests/structures.py", "src/requests/exceptions.py"],
+      "tests": [
+        {"path": "tests/test_requests.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ]
+    },
+    "validation_status": "VERIFIED",
+    "notes": "All production and test files exist on disk at pinned commit."
+  },
+  {
+    "task_id": "task-07-aria-symbol-schema",
+    "repository": "VarshithReddy2006/ARIA",
+    "commit": "bbc81833baa1b2c6c01a63528bf270a653281729",
+    "ground_truth": {
+      "files": [
+        {"path": "models/symbol.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "services/symbol_service.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "backend/routers/symbols.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "services/api_surface_service.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["Symbol", "SymbolIndex"],
+      "callers": ["SymbolService.build_full", "SymbolService.get_definition"],
+      "dependencies": ["models/phase2.py"],
+      "tests": [
+        {"path": "tests/test_symbol_service.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "tests/test_evidence_impact_analysis.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ]
+    },
+    "validation_status": "VERIFIED",
+    "notes": "All production and test files exist on disk at pinned commit."
+  },
+  {
+    "task_id": "task-08-aria-call-graph-blast-radius",
+    "repository": "VarshithReddy2006/ARIA",
+    "commit": "bbc81833baa1b2c6c01a63528bf270a653281729",
+    "ground_truth": {
+      "files": [
+        {"path": "services/call_graph_service.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "backend/routers/call_graph.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "services/impact_analysis_service.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["CallGraphService.get_blast_radius", "CallGraphQueryEngine.get_blast_radius"],
+      "callers": ["get_blast_radius_endpoint", "ImpactAnalysisService._resolve_callers"],
+      "dependencies": ["models/call_graph.py", "services/call_graph/query.py"],
+      "tests": [
+        {"path": "tests/test_call_graph.py", "status": "STALE", "exists_at_evaluated_commit": false, "notes": "Does not exist on disk. Actual test is tests/test_call_graph_service.py"},
+        {"path": "tests/test_evidence_impact_analysis.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ]
+    },
+    "validation_status": "PARTIAL",
+    "notes": "tests/test_call_graph.py is missing on disk in pinned commit."
+  },
+  {
+    "task_id": "task-09-aria-api-surface-status",
+    "repository": "VarshithReddy2006/ARIA",
+    "commit": "bbc81833baa1b2c6c01a63528bf270a653281729",
+    "ground_truth": {
+      "files": [
+        {"path": "models/api_surface.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "services/api_surface_service.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "services/breaking_change_analyzer.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "backend/routers/api_surface.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["ApiStatus", "ClassifiedSymbol"],
+      "callers": ["APISurfaceService._classify_symbol", "BreakingChangeAnalyzer.analyze"],
+      "dependencies": ["models/phase2.py"],
+      "tests": [
+        {"path": "tests/test_api_surface.py", "status": "STALE", "exists_at_evaluated_commit": false, "notes": "Does not exist on disk. Actual test is tests/test_api_surface_service.py"}
+      ]
+    },
+    "validation_status": "PARTIAL",
+    "notes": "tests/test_api_surface.py is missing on disk in pinned commit."
+  },
+  {
+    "task_id": "task-10-aria-impact-engine-bucketing",
+    "repository": "VarshithReddy2006/ARIA",
+    "commit": "bbc81833baa1b2c6c01a63528bf270a653281729",
+    "ground_truth": {
+      "files": [
+        {"path": "services/impact_analysis_service.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "backend/routers/architecture.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "tests/test_evidence_impact_analysis.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ],
+      "symbols": ["ImpactAnalysisService._classify_blast_radius", "ImpactAnalysisService.analyze_change"],
+      "callers": ["get_impact_analysis"],
+      "dependencies": ["models/phase2.py", "services/architecture_service.py"],
+      "tests": [
+        {"path": "tests/test_evidence_impact_analysis.py", "status": "VERIFIED", "exists_at_evaluated_commit": true},
+        {"path": "tests/test_impact_analysis.py", "status": "VERIFIED", "exists_at_evaluated_commit": true}
+      ]
+    },
+    "validation_status": "VERIFIED",
+    "notes": "All production and test files exist on disk at pinned commit."
+  }
+]

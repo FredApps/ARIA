@@ -1,0 +1,90 @@
+{
+  "aggregate": {
+    "baseline_total_false_positives": 4875,
+    "aria_total_false_positives": 322,
+    "total_false_alarms_removed": 4553,
+    "overall_noise_reduction_percentage": 93.39
+  },
+  "per_task": [
+    {
+      "task_id": "task-01-fastapi-oauth2",
+      "repository": "fastapi/fastapi",
+      "baseline_false_positives": 853,
+      "aria_false_positives": 22,
+      "false_alarms_removed": 831,
+      "percentage_reduction": 97.42
+    },
+    {
+      "task_id": "task-02-fastapi-serialize-response",
+      "repository": "fastapi/fastapi",
+      "baseline_false_positives": 865,
+      "aria_false_positives": 29,
+      "false_alarms_removed": 836,
+      "percentage_reduction": 96.65
+    },
+    {
+      "task_id": "task-03-fastapi-status-codes",
+      "repository": "fastapi/fastapi",
+      "baseline_false_positives": 875,
+      "aria_false_positives": 6,
+      "false_alarms_removed": 869,
+      "percentage_reduction": 99.31
+    },
+    {
+      "task_id": "task-04-requests-session-send",
+      "repository": "psf/requests",
+      "baseline_false_positives": 29,
+      "aria_false_positives": 12,
+      "false_alarms_removed": 17,
+      "percentage_reduction": 58.62
+    },
+    {
+      "task_id": "task-05-requests-adapters-ssl",
+      "repository": "psf/requests",
+      "baseline_false_positives": 30,
+      "aria_false_positives": 9,
+      "false_alarms_removed": 21,
+      "percentage_reduction": 70.0
+    },
+    {
+      "task_id": "task-06-requests-models-response",
+      "repository": "psf/requests",
+      "baseline_false_positives": 29,
+      "aria_false_positives": 11,
+      "false_alarms_removed": 18,
+      "percentage_reduction": 62.07
+    },
+    {
+      "task_id": "task-07-aria-symbol-schema",
+      "repository": "VarshithReddy2006/ARIA",
+      "baseline_false_positives": 749,
+      "aria_false_positives": 61,
+      "false_alarms_removed": 688,
+      "percentage_reduction": 91.86
+    },
+    {
+      "task_id": "task-08-aria-call-graph-blast-radius",
+      "repository": "VarshithReddy2006/ARIA",
+      "baseline_false_positives": 451,
+      "aria_false_positives": 67,
+      "false_alarms_removed": 384,
+      "percentage_reduction": 85.14
+    },
+    {
+      "task_id": "task-09-aria-api-surface-status",
+      "repository": "VarshithReddy2006/ARIA",
+      "baseline_false_positives": 671,
+      "aria_false_positives": 45,
+      "false_alarms_removed": 626,
+      "percentage_reduction": 93.29
+    },
+    {
+      "task_id": "task-10-aria-impact-engine-bucketing",
+      "repository": "VarshithReddy2006/ARIA",
+      "baseline_false_positives": 323,
+      "aria_false_positives": 60,
+      "false_alarms_removed": 263,
+      "percentage_reduction": 81.42
+    }
+  ]
+}

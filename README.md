@@ -37,7 +37,7 @@ Architecture · Execution · Contracts · Retrieval · Impact
 
 <br/>
 
-[Overview](#why-aria) · [Mental Model](#the-aria-mental-model) · [Capabilities](#what-aria-provides) · [Architecture](#architecture) · [Foundations](#engineering-foundations) · [Quick Start](#quick-start) · [API](#api-reference) · [MCP](#mcp) · [Performance](#performance--benchmarks) · [Deployment](#deployment) · [Roadmap](#roadmap) · [FAQ](#faq)
+[Overview](#why-aria) · [Mental Model](#the-aria-mental-model) · [Capabilities](#what-aria-provides) · [Architecture](#architecture) · [Foundations](#engineering-foundations) · [Quick Start](#quick-start) · [API](#api-reference) · [MCP](#mcp) · [Evaluation](#evaluation--evidence) · [Deployment](#deployment) · [Roadmap](#roadmap) · [FAQ](#faq)
 
 <br/>
 
@@ -59,6 +59,30 @@ Repository ──► Chunks ──► Embeddings ──► LLM (Structurally Bli
 
 Repository Intelligence Architecture (RIA)
 Repository ──► AST ──► File Graph ──► Call Graph ──► API Surface ──► Symbol Index ──► Qdrant ──► LLM
+```
+
+```text
+ARIA is structural repository intelligence + retrieval, not a chatbot over text files:
+
+Developer Question
+        │
+        ▼
+       ARIA
+        │
+        ▼
+ Structural Context
+        │
+        ▼
+  Files + Symbols
+        │
+        ▼
+Call / Dependency Graphs
+        │
+        ▼
+     Impact
+        │
+        ▼
+Evidence-Backed Answer
 ```
 
 ---
@@ -1315,6 +1339,26 @@ Ensure `CLONED_REPOS_PATH` points to a path outside the backend directory tree (
 Always run `pytest tests/ -v` with the explicit `tests/` directory to prevent pytest from traversing cloned repositories in `data/`.
 
 </details>
+
+---
+
+## Evaluation & Evidence
+
+ARIA has been evaluated against five real-world repositories:
+
+- **FastAPI** (`fastapi/fastapi`): Declarative ASGI routing & hierarchical dependency injection DAG
+- **LangChain** (`langchain-ai/langchain`): Composable LCEL pipelines, operator overloading (`|`), and dynamic models
+- **Next.js** (`vercel/next.js`): Monorepo server core, BaseServer request handling, and RSC Flight streaming
+- **Kubernetes** (`kubernetes/kubernetes`): Informer cache indexing, rate-limiting workqueues, and reconciler loops
+- **PyTorch** (`pytorch/pytorch`): C10 bitmask operator dispatcher, pybind11 glue, and dynamic autograd DAGs
+
+The evaluation combines a qualitative structural stress test across all five repositories with a separate pinned quantitative 10-task benchmark covering `fastapi/fastapi`, `psf/requests`, and `VarshithReddy2006/ARIA`. On this pinned benchmark, ARIA reduced false-positive file alerts from 4,875 to 322 compared with the conventional text/vector-search baseline—a **93.39% noise reduction**—while achieving a **20.4% Caller Resolution F1** (compared to 1.3% for baseline).
+
+- [Read the full evaluation landing page →](evaluation/README.md)
+- [Explore the 5 deep case studies →](evaluation/case-studies/)
+- [Inspect developer demos & walkthroughs →](evaluation/demos/)
+- [Reproduce the benchmark via Runbook →](evaluation/reproducibility/RUNBOOK.md)
+- [Audit claims & evidence status →](evaluation/reports/CLAIM-VERIFICATION.md)
 
 ---
 
