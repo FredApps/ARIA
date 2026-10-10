@@ -86,6 +86,42 @@ describe('RepoIntelligenceClient', () => {
     assert.strictEqual(result.llm_provider, 'deepseek');
   });
 
+  it('streamSse calls its completion callback once and ignores events after done', async () => {
+    let completionCount = 0;
+    let tokenCount = 0;
+    ({ server, url: mockConfig.backendUrl } = await startMockServer((_req, res) => {
+      res.writeHead(200, { 'Content-Type': 'text/event-stream' });
+      res.write('data: {"status":"done","sources":[],"confidence":0.8}\n\ndata: {"text":"late token"}\n\n');
+      setTimeout(() => res.end(), 25);
+    }));
+
+    client = new RepoIntelligenceClient();
+    client.streamSse(
+      '/api/chat', { repo: 'owner/repo', message: 'hello' },
+      (event) => { if (typeof event.text === 'string') tokenCount += 1; },
+      () => { completionCount += 1; },
+      () => {}
+    );
+    await new Promise((resolve) => setTimeout(resolve, 60));
+    assert.strictEqual(completionCount, 1);
+    assert.strictEqual(tokenCount, 0);
+  });
+
+  it('streamChat reports HTTP failures as errors instead of successful completion', async () => {
+    ({ server, url: mockConfig.backendUrl } = await startMockServer((_req, res) => {
+      jsonResponse(res, { detail: 'backend unavailable' }, 503);
+    }));
+    client = new RepoIntelligenceClient();
+    await new Promise<void>((resolve, reject) => {
+      client.streamChat('owner/repo', 'hello', [], () => {},
+        () => reject(new Error('onDone should not run for HTTP 503')),
+        (err) => {
+          try { assert.match(err.message, /HTTP 503/); resolve(); }
+          catch (assertionError) { reject(assertionError); }
+        });
+    });
+  });
+
   // ── getRecentRepos ──────────────────────────────────────────────────────
 
   it('getRecentRepos() returns array of repos', async () => {
