@@ -125,3 +125,37 @@ def test_old_schema_migrates_and_legacy_lock_waits_for_expiry(tmp_path: Path) ->
     ):
         assert adapter.acquire_lock(repository, ttl_seconds=10)
         assert adapter.is_locked(repository)
+
+
+def test_same_thread_cannot_replace_its_unreleased_expired_handle(tmp_path: Path) -> None:
+    adapter = SQLiteRepositoryLockAdapter(tmp_path / "locks.sqlite")
+    repository = _repository()
+    assert adapter.acquire_lock(repository, ttl_seconds=0)
+    assert not adapter.acquire_lock(repository)
+    adapter.release_lock(repository)
+    assert adapter.acquire_lock(repository)
+    adapter.release_lock(repository)
+
+
+def test_concurrent_constructors_migrate_legacy_schema(tmp_path: Path) -> None:
+    from concurrent.futures import ThreadPoolExecutor
+
+    database = tmp_path / "legacy.sqlite"
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "CREATE TABLE repository_lock ("
+            "repo_id TEXT PRIMARY KEY, acquired_at REAL NOT NULL, ttl_seconds REAL NOT NULL)"
+        )
+    ready = threading.Barrier(2)
+
+    def construct():
+        ready.wait(timeout=5)
+        return SQLiteRepositoryLockAdapter(database)
+
+    with ThreadPoolExecutor(max_workers=2) as workers:
+        futures = [workers.submit(construct) for _ in range(2)]
+        adapters = [future.result(timeout=10) for future in futures]
+    repository = _repository()
+    assert adapters[0].acquire_lock(repository)
+    assert not adapters[1].acquire_lock(repository)
+    adapters[0].release_lock(repository)

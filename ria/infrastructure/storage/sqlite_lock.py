@@ -91,6 +91,11 @@ class SQLiteRepositoryLockAdapter(RepositoryLockPort):
         now = time.monotonic()
         owner_token = uuid.uuid4().hex
         repo_str = repo_id.repo_id.value
+        # The release-by-repository API cannot distinguish nested acquisitions.
+        # Require the owning thread to release its previous handle first, even
+        # if that lease has expired in the database.
+        if repo_str in self._tokens():
+            return False
 
         with self._get_connection() as conn:
             try:
