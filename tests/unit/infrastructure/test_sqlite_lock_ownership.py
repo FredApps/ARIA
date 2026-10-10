@@ -127,7 +127,9 @@ def test_old_schema_migrates_and_legacy_lock_waits_for_expiry(tmp_path: Path) ->
         assert adapter.is_locked(repository)
 
 
-def test_same_thread_cannot_replace_its_unreleased_expired_handle(tmp_path: Path) -> None:
+def test_same_thread_cannot_replace_its_unreleased_expired_handle(
+    tmp_path: Path,
+) -> None:
     adapter = SQLiteRepositoryLockAdapter(tmp_path / "locks.sqlite")
     repository = _repository()
     assert adapter.acquire_lock(repository, ttl_seconds=0)
